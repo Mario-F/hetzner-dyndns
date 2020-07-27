@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # Update a DNS Record on Hetzner DNS API with your external IP Address
 #
@@ -49,7 +49,7 @@ def main():
         # If so the IP should be valid
         if ip in retIPs:
           foundIP = ip
-          _log(f"Valid IP found: {ip}")
+          _log("Valid IP found: {}".format(ip))
           break
         else:
           retIPs.append(ip)
@@ -86,7 +86,7 @@ def main():
 #
 def _apiGet(endpoint):
   token = args.token
-  response = requests.get(url=f"https://dns.hetzner.com/api/v1/{endpoint}", headers={"Auth-API-Token": token})
+  response = requests.get(url="https://dns.hetzner.com/api/v1/{}".format(endpoint), headers={"Auth-API-Token": token})
   _debug('Response HTTP Status Code: {status_code}'.format(status_code=response.status_code))
   _debug('Response HTTP Response Body: {content}'.format(content=response.content))
   return response.json()
