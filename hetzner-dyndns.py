@@ -8,7 +8,7 @@
 
 import argparse, requests, re, time, random, json
 
-version = 0.1
+version = 0.1.1
 
 # Parse commandline arguments
 parser = argparse.ArgumentParser(description="Hetzner Custom dyndns updates v" + str(version))
