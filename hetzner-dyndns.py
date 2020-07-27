@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Update a DNS Record on Hetzner DNS API with your external IP Address
 #
