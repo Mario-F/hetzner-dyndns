@@ -100,7 +100,7 @@ def _getAllRecords():
   return records
 
 def _getRecord(record):
-  record = _apiGet(f'records/{record}')['record']
+  record = _apiGet('records/{}'.format(record))['record']
   return record
 
 def _putRecord(record):
@@ -155,7 +155,7 @@ def _ipIpify():
   if not ip:
     _log('Failed to aquire IP from ipify')
     return False
-  _log(f'IP from ipify: {ip}')
+  _log('IP from ipify: {}'.format(ip))
   return ip
 
 def _ipCheckIP():
@@ -164,7 +164,7 @@ def _ipCheckIP():
   if not ip:
     _log('Failed to aquire IP from checkip')
     return False
-  _log(f'IP from checkip: {ip}')
+  _log('IP from checkip: {}'.format(ip))
   return ip
 
 def _ipIfconfigME():
@@ -173,7 +173,7 @@ def _ipIfconfigME():
   if not ip:
     _log('Failed to aquire IP from ifconfigME')
     return False
-  _log(f'IP from ifconfigME: {ip}')
+  _log('IP from ifconfigME: {}'.format(ip))
   return ip
 
 if __name__ == "__main__":
