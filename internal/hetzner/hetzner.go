@@ -2,6 +2,7 @@ package hetzner
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"sync"
 
@@ -53,6 +54,9 @@ func getRequest(token string, uri string) responses {
 	resp, err := client.Do(req)
 	if err != nil {
 		panic(err)
+	}
+	if resp.StatusCode != 200 {
+		panic(errors.New(resp.Status))
 	}
 
 	var respBody responses = responses{}
