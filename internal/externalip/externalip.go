@@ -10,9 +10,10 @@ import (
 func GetExternalIP() (string, error) {
 	for _, p := range providers.ProviderList {
 		ip, err := p.GetIP()
-		if err == nil {
-			log.Printf("Name: %+v, IP: %+v", p.ProviderName, ip)
+		if err != nil {
+			continue
 		}
+		log.Printf("Name: %+v, IP: %+v", p.ProviderName, ip)
 	}
 
 	return "test", nil
