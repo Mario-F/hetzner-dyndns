@@ -6,6 +6,7 @@ import (
 )
 
 var errIPNotFound error = errors.New("IP Not Found")
+var errResponseNotOK error = errors.New("HTTP Response is not OK")
 
 // Provider holds a external ip provider
 type Provider struct {

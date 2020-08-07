@@ -1,15 +1,28 @@
 package providers
 
 import (
+	"io/ioutil"
 	"log"
+	"net/http"
 )
 
 func ipifyGetIP() (string, error) {
 	log.Println("Start GetIP with ipify")
 
-	// TODO real call
+	resp, err := http.Get("https://api.ipify.org")
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != 200 {
+		return "", errResponseNotOK
+	}
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
 
-	ip, err := captureIP("{'ip':'20.122.241.150'}")
+	ip, err := captureIP(string(body))
 	if err != nil {
 		return "", err
 	}
