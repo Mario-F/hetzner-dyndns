@@ -12,5 +12,5 @@ func cmdMyIP() {
 		panic(err)
 	}
 
-	fmt.Printf("Your external IP is: %v", res)
+	fmt.Printf("Your external IP is: %v\n", res)
 }
