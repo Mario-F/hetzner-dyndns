@@ -16,15 +16,9 @@ type Provider struct {
 
 // ProviderList has all created providers
 var ProviderList []Provider = []Provider{
-	testProvider,
 	ipifyProvider,
-}
-
-var testProvider Provider = Provider{
-	GetIP: func() (string, error) {
-		return "TestIP", nil
-	},
-	ProviderName: "TestProvider",
+	checkIPProvider,
+	ifconfigMEProvider,
 }
 
 func captureIP(text string) (string, error) {
