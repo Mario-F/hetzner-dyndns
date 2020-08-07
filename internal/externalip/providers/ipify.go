@@ -2,12 +2,13 @@ package providers
 
 import (
 	"io/ioutil"
-	"log"
 	"net/http"
+
+	"github.com/Mario-F/hetzner-dyndns/internal/logger"
 )
 
 func ipifyGetIP() (string, error) {
-	log.Println("Start GetIP with ipify")
+	logger.Debugf("Start GetIP with ipify")
 
 	resp, err := http.Get("https://api.ipify.org")
 	if err != nil {
@@ -29,7 +30,7 @@ func ipifyGetIP() (string, error) {
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	log.Printf("Found IP wihth ipify: %+v\n", ip)
+	logger.Debugf("Found IP wihth ipify: %+v\n", ip)
 	return ip, nil
 }
 

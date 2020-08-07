@@ -2,12 +2,13 @@ package providers
 
 import (
 	"io/ioutil"
-	"log"
 	"net/http"
+
+	"github.com/Mario-F/hetzner-dyndns/internal/logger"
 )
 
 func checkIPGetIP() (string, error) {
-	log.Println("Start GetIP with CheckIP")
+	logger.Debugf("Start GetIP with CheckIP")
 
 	resp, err := http.Get("http://checkip.dyndns.org")
 	if err != nil {
@@ -29,7 +30,7 @@ func checkIPGetIP() (string, error) {
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	log.Printf("Found IP wihth CheckIP: %+v\n", ip)
+	logger.Debugf("Found IP wihth CheckIP: %+v\n", ip)
 	return ip, nil
 }
 

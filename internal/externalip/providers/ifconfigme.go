@@ -2,12 +2,13 @@ package providers
 
 import (
 	"io/ioutil"
-	"log"
 	"net/http"
+
+	"github.com/Mario-F/hetzner-dyndns/internal/logger"
 )
 
 func ifconfigMEGetIP() (string, error) {
-	log.Println("Start GetIP with ifconfigME")
+	logger.Debugf("Start GetIP with ifconfigME")
 
 	resp, err := http.Get("http://ifconfig.me")
 	if err != nil {
@@ -29,7 +30,7 @@ func ifconfigMEGetIP() (string, error) {
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	log.Printf("Found IP wihth ifconfigME: %+v\n", ip)
+	logger.Debugf("Found IP wihth ifconfigME: %+v\n", ip)
 	return ip, nil
 }
 
