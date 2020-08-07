@@ -29,19 +29,33 @@ func Execute() {
 	command := flag.Arg(0)
 	logger.Debugf("Executing with token '%v' and command '%v'", token, command)
 
-	// Token is required
+	switch command {
+	case "records":
+		logger.Infof("Retrieving all records with id from Hetzer DNS")
+		checkToken()
+		cmdRecords(token)
+	case "myip":
+		logger.Infof("Obtain my external IP")
+		cmdMyIP()
+	case "update":
+		logger.Infof("Updating Hetzner DNS with external IP")
+		checkToken()
+		checkRecord()
+	default:
+		usage()
+	}
+}
+
+func checkToken() {
 	if token == "" {
 		fmt.Println("The token flag is required!")
 		usage()
 	}
+}
 
-	switch command {
-	case "records":
-		logger.Infof("Retrieving all records with id from Hetzer DNS")
-		cmdRecords(token)
-	case "update":
-		logger.Infof("Updating Hetzner DNS with external IP")
-	default:
+func checkRecord() {
+	if record == "" {
+		fmt.Println("The record id is required!")
 		usage()
 	}
 }
