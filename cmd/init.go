@@ -15,7 +15,7 @@ var (
 
 func initCommands() {
 	flag.BoolVar(&logger.DebugMode, "debug", false, "Turn on debug messages.")
-	flag.BoolVar(&logger.QuietMode, "quiet", false, "Surpress logmessages.")
+	flag.BoolVar(&logger.QuietMode, "quiet", false, "Suppress logmessages.")
 	flag.StringVar(&token, "token", "", "Your Hetzner DNS token.")
 	flag.StringVar(&record, "record", "", "Your Hetzner DNS token.")
 
@@ -71,7 +71,7 @@ Usage:
 Available Commands:
 	records		Get record with id from Hetzner DNS
 	update		Update record with external IP
-	myip		Aquire your external IP and output it
+	myip		Acquire your external IP and output it
 	update		Update your external IP to Hetzner DNS
 
 Flags:
