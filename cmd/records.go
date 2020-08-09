@@ -13,7 +13,8 @@ import (
 func cmdRecords(token string) {
 	var resRecords []hetzner.Record
 
-	resRecords = hetzner.GetRecords(token)
+	hetzner.SetToken(token)
+	resRecords = hetzner.GetRecords()
 	logger.Debugf("Results from GetRecords: %d", len(resRecords))
 
 	// Process result to find order and size data

@@ -1,6 +1,7 @@
 package hetzner
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"net/http"
@@ -13,10 +14,15 @@ const (
 	hetznerURL string = "https://dns.hetzner.com/api/v1/"
 )
 
+var (
+	apiToken string
+)
+
 type responses struct {
 	Records []Record `json:"records"`
 	Record  Record   `json:"record"`
 	Zones   []Zone   `json:"zones"`
+	Zone    Zone     `json:"zone"`
 }
 
 // Record is a hetzner record entry from the api
@@ -26,9 +32,9 @@ type Record struct {
 	ZoneID   string `json:"zone_id"`
 	Name     string `json:"name"`
 	Value    string `json:"value"`
-	TTL      int    `json:"ttl"`
-	Fullname string
-	Zone     Zone
+	TTL      int    `json:"ttl,omitempty"`
+	Fullname string `json:"-"`
+	Zone     Zone   `json:"-"`
 }
 
 // Zone is a hetzner zone record entry from the api
@@ -37,7 +43,40 @@ type Zone struct {
 	Name string `json:"name"`
 }
 
-func getRequest(token string, uri string) responses {
+// SetToken sets the api token for all following api calls
+func SetToken(token string) {
+	apiToken = token
+}
+
+// Update updates the record on hetzner api
+func (r Record) Update() error {
+	body, err := json.Marshal(r)
+	if err != nil {
+		return err
+	}
+	logger.Debugf("Update record will send following json:\n%+v", string(body))
+
+	client := &http.Client{}
+	req, err := http.NewRequest("PUT", hetznerURL+"records/"+r.ID, bytes.NewBuffer(body))
+	if err != nil {
+		return err
+	}
+
+	req.Header.Add("Content-Type", "application/json")
+	req.Header.Add("Auth-API-Token", apiToken)
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	if resp.StatusCode != 200 {
+		return errors.New("Failed to update record, statuscode: " + string(resp.StatusCode))
+	}
+
+	return nil
+}
+
+func getRequest(uri string) responses {
 	client := &http.Client{}
 
 	req, err := http.NewRequest("GET", hetznerURL+uri, nil)
@@ -45,7 +84,7 @@ func getRequest(token string, uri string) responses {
 		panic(err)
 	}
 
-	req.Header.Add("Auth-API-Token", token)
+	req.Header.Add("Auth-API-Token", apiToken)
 	parseFormErr := req.ParseForm()
 	if parseFormErr != nil {
 		panic(parseFormErr)
@@ -68,7 +107,7 @@ func getRequest(token string, uri string) responses {
 }
 
 // GetRecords get all dns records merged with its zone information
-func GetRecords(token string) []Record {
+func GetRecords() []Record {
 	var (
 		wg         sync.WaitGroup = sync.WaitGroup{}
 		resZones   []Zone
@@ -78,12 +117,12 @@ func GetRecords(token string) []Record {
 	logger.Infof("Requesting Records and Zone info in parallel")
 	wg.Add(2)
 	go func() {
-		resZones = getRequest(token, "zones").Zones
+		resZones = getRequest("zones").Zones
 		logger.Debugf("Zones request finished with %d results", len(resZones))
 		wg.Done()
 	}()
 	go func() {
-		resRecords = getRequest(token, "records").Records
+		resRecords = getRequest("records").Records
 		logger.Debugf("Records request finished with %d results", len(resRecords))
 		wg.Done()
 	}()
@@ -104,4 +143,13 @@ func GetRecords(token string) []Record {
 	}
 
 	return aRecords
+}
+
+// GetRecord get one record by id (includes zone)
+func GetRecord(recordID string) Record {
+	resRecord := getRequest("records/" + recordID).Record
+	resRecord.Zone = getRequest("zones/" + resRecord.ZoneID).Zone
+	resRecord.Fullname = resRecord.Name + "." + resRecord.Zone.Name
+
+	return resRecord
 }
