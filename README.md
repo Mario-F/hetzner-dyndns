@@ -8,7 +8,15 @@ This program uses a random list of 'what-is-my-ip' providers to cut down on erro
 
 ## Install
 
-Install binaries for your system from the release page.
+Install binaries for your system from the release page or use the install script:
+
+```shell
+# Local (current directory)
+curl -s https://raw.githubusercontent.com/Mario-F/hetzner-dyndns/master/install.sh | BINDIR=./ bash
+
+# Global
+curl -s https://raw.githubusercontent.com/Mario-F/hetzner-dyndns/master/install.sh | sudo BINDIR=/usr/local/bin bash
+```
 
 ## Usage
 
