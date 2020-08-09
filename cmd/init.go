@@ -41,6 +41,7 @@ func Execute() {
 		logger.Infof("Updating Hetzner DNS with external IP")
 		checkToken()
 		checkRecord()
+		cmdUpdate()
 	default:
 		usage()
 	}
@@ -70,6 +71,8 @@ Usage:
 Available Commands:
 	records		Get record with id from Hetzner DNS
 	update		Update record with external IP
+	myip		Aquire your external IP and output it
+	update		Update your external IP to Hetzner DNS
 
 Flags:
 `)
