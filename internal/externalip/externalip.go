@@ -33,5 +33,5 @@ func GetExternalIP() (string, error) {
 		found = ip
 	}
 
-	return "", errors.New("At least 2 providers doesnt confirm external IP")
+	return "", errors.New("at least 2 providers doesnt confirm external IP")
 }
