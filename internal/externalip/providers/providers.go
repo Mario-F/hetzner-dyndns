@@ -16,9 +16,10 @@ type Provider struct {
 
 // ProviderList has all created providers
 var ProviderList []Provider = []Provider{
-	ipifyProvider,
 	checkIPProvider,
 	ifconfigMEProvider,
+	ipifyProvider,
+	whatismyipProvider,
 	whoismyispProvider,
 }
 
