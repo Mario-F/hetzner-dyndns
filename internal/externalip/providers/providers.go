@@ -19,6 +19,7 @@ var ProviderList []Provider = []Provider{
 	ipifyProvider,
 	checkIPProvider,
 	ifconfigMEProvider,
+	whoismyispProvider,
 }
 
 func captureIP(text string) (string, error) {
