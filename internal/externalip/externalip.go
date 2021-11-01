@@ -21,6 +21,7 @@ func GetExternalIP() (string, error) {
 	for _, p := range pList {
 		ip, err := p.GetIP()
 		if err != nil {
+			logger.Debugf("Provider %+v failed", p.ProviderName)
 			continue
 		}
 		logger.Debugf("Name: %+v, IP: %+v", p.ProviderName, ip)
