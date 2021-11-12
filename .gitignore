@@ -4,3 +4,4 @@ bin/
 
 # Custom
 .vscode/*
+!.vscode/launch.json
