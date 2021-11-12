@@ -24,3 +24,20 @@ curl -s https://raw.githubusercontent.com/Mario-F/hetzner-dyndns/master/install.
 2. Obtain your API-Token from Hetzner DNS managment site.
 3. Fetch your domain record ids with: `./hetzner-dyndns --token 'your-api-token' records`
 4. Call update with record ID: `./hetzner-dyndns --token 'your-api-token' --record 'domain-record-id' update`
+
+## Development / Debugging
+
+There a serveral ways to easy start development and using live debugging provided by [delve](https://github.com/go-delve/delve)
+
+### VSCode integrated Console
+
+The provided launch.json has a debug task `Launch File` predefined, just hit start and it should run with the args provided in launch.json.
+
+## VSCode external Terminal
+
+A more advanced way to test in an external Terminal is provided by the `External Debugging` launch config and `./debug` script:
+
+1. Execute debug script with optional arguments: `./debug --token super-secret-token records`
+2. Start the `External Debugging` session in vscode
+
+Unfortunately the order is importend because vscode does not try to automatically connect after start.
