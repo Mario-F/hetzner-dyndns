@@ -25,6 +25,8 @@ curl -s https://raw.githubusercontent.com/Mario-F/hetzner-dyndns/master/install.
 3. Fetch your domain record ids with: `./hetzner-dyndns --token 'your-api-token' records`
 4. Call update with record ID: `./hetzner-dyndns --token 'your-api-token' --record 'domain-record-id' update`
 
+There is also a docker image available: `docker run --rm -it ghcr.io/mario-f/hetzner-dyndns:latest myip`
+
 ## Development / Debugging
 
 There a serveral ways to easy start development and using live debugging provided by [delve](https://github.com/go-delve/delve)
