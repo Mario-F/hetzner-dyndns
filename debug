@@ -1,0 +1,2 @@
+#!/bin/sh
+dlv debug --listen=:8345 --headless --log --api-version=2 -- "$@"
