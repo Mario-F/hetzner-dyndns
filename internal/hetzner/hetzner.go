@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"sync"
 
@@ -70,7 +71,7 @@ func (r Record) Update() error {
 		return err
 	}
 	if resp.StatusCode != 200 {
-		return errors.New("Failed to update record, statuscode: " + string(resp.StatusCode))
+		return errors.New("Failed to update record, statuscode: " + fmt.Sprint(resp.StatusCode))
 	}
 
 	return nil
