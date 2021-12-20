@@ -1,5 +1,9 @@
 # Hetzner DynDNS
 
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+![GitHub issues](https://img.shields.io/github/issues/Mario-F/hetzner-dyndns)
+![GitHub all releases](https://img.shields.io/github/downloads/Mario-F/hetzner-dyndns/total)
+
 A tool for updating Hetzner DNS with your external IP.
 
 ## IP Scraping
