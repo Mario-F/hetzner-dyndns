@@ -1,5 +1,6 @@
 # Hetzner DynDNS
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=34NHCDNHRRV6G)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 ![GitHub issues](https://img.shields.io/github/issues/Mario-F/hetzner-dyndns)
 ![GitHub all releases](https://img.shields.io/github/downloads/Mario-F/hetzner-dyndns/total)
