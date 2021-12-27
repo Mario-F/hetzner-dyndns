@@ -12,7 +12,8 @@ RUN go mod download
 
 COPY . ./
 
-RUN go build -o /hetzner-dyndns
+ARG BUILD_VERSION=development
+RUN go build -ldflags="-X 'github.com/Mario-F/hetzner-dyndns/cmd.Version=${BUILD_VERSION}'" -o /hetzner-dyndns
 
 ##
 ## Deploy
