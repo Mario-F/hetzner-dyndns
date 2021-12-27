@@ -45,7 +45,7 @@ func Execute() {
 		checkRecord()
 		cmdUpdate(token, record)
 	case "version":
-		fmt.Printf("%s", Version)
+		fmt.Printf("%s\n", Version)
 	default:
 		usage()
 	}
