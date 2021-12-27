@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
 )
@@ -91,9 +92,20 @@ func getRequest(uri string) responses {
 		panic(parseFormErr)
 	}
 
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
+	var resp *http.Response
+	finshed := false
+	for i := 0; i < 3 && !finshed; i++ {
+		resp, err = client.Do(req)
+		if err != nil {
+			panic(err)
+		}
+
+		if resp.StatusCode == 404 {
+			logger.Infof("Hetzner API returned 404, retry.")
+			time.Sleep(2 * time.Second)
+			continue
+		}
+		finshed = true
 	}
 	if resp.StatusCode != 200 {
 		panic(errors.New(resp.Status))
