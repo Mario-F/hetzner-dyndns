@@ -13,6 +13,8 @@ var (
 	record string
 )
 
+var Version = "development"
+
 func initCommands() {
 	flag.BoolVar(&logger.DebugMode, "debug", false, "Turn on debug messages.")
 	flag.BoolVar(&logger.QuietMode, "quiet", false, "Suppress logmessages.")
@@ -42,6 +44,8 @@ func Execute() {
 		checkToken()
 		checkRecord()
 		cmdUpdate(token, record)
+	case "version":
+		fmt.Printf("%s", Version)
 	default:
 		usage()
 	}
@@ -73,6 +77,7 @@ Available Commands:
 	update		Update record with external IP
 	myip		Acquire your external IP and output it
 	update		Update your external IP to Hetzner DNS
+	version		Print version of hetzner-dyndns
 
 Flags:
 `)
