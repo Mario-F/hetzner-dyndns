@@ -41,7 +41,6 @@ var myipCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(myipCmd)
-	// TODO: Add flag for output formats
-	myipCmd.Flags().StringVarP(&outputMode, "output", "o", "text", fmt.Sprintf("How the result should be formatted.\nAllowed values: %s", strings.Join(OutputModes, ", ")))
 
+	myipCmd.Flags().StringVarP(&outputMode, "output", "o", "text", fmt.Sprintf("How the result should be formatted.\nAllowed values: %s", strings.Join(OutputModes, ", ")))
 }
