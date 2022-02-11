@@ -17,7 +17,7 @@ var updateCmd = &cobra.Command{
 		var (
 			wg     sync.WaitGroup = sync.WaitGroup{}
 			record hetzner.Record
-			myip   string
+			myip   externalip.ExternalIP
 		)
 		hetzner.SetToken(token)
 
@@ -29,7 +29,7 @@ var updateCmd = &cobra.Command{
 		}()
 		go func() {
 			var err error
-			myip, err = externalip.GetExternalIP()
+			myip, err = externalip.GetExternalIP(externalip.IPv4)
 			if err != nil {
 				panic(err)
 			}
@@ -39,14 +39,14 @@ var updateCmd = &cobra.Command{
 
 		logger.Infof("Domain: %+v", record.Fullname)
 		logger.Infof("Old - IP: %+v", record.Value)
-		logger.Infof("New - IP: %+v", myip)
+		logger.Infof("New - IP: %+v", myip.IP)
 
-		if record.Value == myip {
+		if record.Value == myip.IP {
 			logger.Infof("No IP diff detected, update not necessary.")
 			return
 		}
 
-		record.Value = myip
+		record.Value = myip.IP
 		err := record.Update()
 		if err != nil {
 			panic(err)

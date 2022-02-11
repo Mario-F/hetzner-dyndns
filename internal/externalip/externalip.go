@@ -9,9 +9,22 @@ import (
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
 )
 
+type IPVersion string
+
+const (
+	IPv4 IPVersion = "ipv4"
+	IPv6 IPVersion = "ipv6"
+)
+
+type ExternalIP struct {
+	IP      string
+	Version IPVersion
+}
+
 // GetExternalIP gets the actual external IP by different Provides
-func GetExternalIP() (string, error) {
+func GetExternalIP(IPVersion) (ExternalIP, error) {
 	var pList []providers.Provider = providers.ProviderList
+	result := ExternalIP{}
 
 	// shuffle ProviderList
 	rand.Seed(time.Now().UnixNano())
@@ -28,10 +41,11 @@ func GetExternalIP() (string, error) {
 		// found is equal ip means that is the second confirmation
 		if found == ip {
 			logger.Debugf("Second confirmation for IP: %+v", ip)
-			return ip, nil
+			result.IP = ip
+			return result, nil
 		}
 		found = ip
 	}
 
-	return "", errors.New("at least 2 providers doesnt confirm external IP")
+	return result, errors.New("at least 2 providers doesnt confirm external IP")
 }

@@ -20,16 +20,16 @@ var myipCmd = &cobra.Command{
 	Use:   "myip",
 	Short: "Acquire your external IP and output it",
 	Run: func(cmd *cobra.Command, args []string) {
-		res, err := externalip.GetExternalIP()
+		res, err := externalip.GetExternalIP(externalip.IPv4)
 		if err != nil {
 			panic(err)
 		}
 
 		switch outputMode {
 		case "text":
-			fmt.Printf("Your external IP is: %s\n", res)
+			fmt.Printf("Your external IP is: %s\n", res.IP)
 		case "short":
-			fmt.Printf("%s", res)
+			fmt.Printf("%s", res.IP)
 		default:
 			err := fmt.Errorf("Output mode is not valid, use one of: %s", strings.Join(OutputModes, ", "))
 			if err != nil {
