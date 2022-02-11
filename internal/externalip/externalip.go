@@ -22,9 +22,10 @@ type ExternalIP struct {
 }
 
 // GetExternalIP gets the actual external IP by different Provides
-func GetExternalIP(IPVersion) (ExternalIP, error) {
+func GetExternalIP(version IPVersion) (ExternalIP, error) {
 	var pList []providers.Provider = providers.ProviderList
 	result := ExternalIP{}
+	result.Version = version
 
 	// shuffle ProviderList
 	rand.Seed(time.Now().UnixNano())
