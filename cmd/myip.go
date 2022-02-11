@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"strings"
@@ -12,6 +13,7 @@ import (
 var OutputModes = []string{
 	"text",
 	"short",
+	"json",
 }
 
 var outputMode string
@@ -30,6 +32,12 @@ var myipCmd = &cobra.Command{
 			fmt.Printf("Your external IP is: %s\n", res.IP)
 		case "short":
 			fmt.Printf("%s", res.IP)
+		case "json":
+			jsonRes, err := json.Marshal(res)
+			if err != nil {
+				panic(err)
+			}
+			fmt.Printf("%s", jsonRes)
 		default:
 			err := fmt.Errorf("Output mode is not valid, use one of: %s", strings.Join(OutputModes, ", "))
 			if err != nil {

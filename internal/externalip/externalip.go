@@ -17,8 +17,8 @@ const (
 )
 
 type ExternalIP struct {
-	IP      string
-	Version IPVersion
+	IP      string    `json:"ip"`
+	Version IPVersion `json:"version"`
 }
 
 // GetExternalIP gets the actual external IP by different Provides
