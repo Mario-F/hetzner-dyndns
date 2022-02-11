@@ -58,6 +58,6 @@ func init() {
 	recordsCmd.Flags().StringVar(&token, "token", "", "The hetzner token to access DNS API")
 	err := recordsCmd.MarkFlagRequired("token")
 	if err != nil {
-		fmt.Printf("An error occured: %v+", err)
+		fmt.Printf("An error occurred: %v+", err)
 	}
 }

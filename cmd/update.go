@@ -61,11 +61,11 @@ func init() {
 	updateCmd.Flags().StringVar(&token, "token", "", "The hetzner token to access DNS API")
 	err := updateCmd.MarkFlagRequired("token")
 	if err != nil {
-		fmt.Printf("An error occured: %v+", err)
+		fmt.Printf("An error occurred: %v+", err)
 	}
 	updateCmd.Flags().StringVar(&recordInput, "record", "", "The DNS record to update with the external IP")
 	err = updateCmd.MarkFlagRequired("record")
 	if err != nil {
-		fmt.Printf("An error occured: %v+", err)
+		fmt.Printf("An error occurred: %v+", err)
 	}
 }
