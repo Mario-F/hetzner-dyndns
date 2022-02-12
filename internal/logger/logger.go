@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"log"
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -14,13 +14,13 @@ var (
 // Debugf logs formatted debug messages
 func Debugf(msg string, vars ...interface{}) {
 	if DebugMode {
-		log.Printf(msg, vars...)
+		log.Debugf(msg, vars...)
 	}
 }
 
 // Infof logs formatted info messages
 func Infof(msg string, vars ...interface{}) {
 	if !QuietMode {
-		log.Printf(msg, vars...)
+		log.Infof(msg, vars...)
 	}
 }
