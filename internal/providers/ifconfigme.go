@@ -7,10 +7,10 @@ import (
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
 )
 
-func whatismyipGetIP() (string, error) {
-	logger.Debugf("Start GetIP with whatismyip")
+func ifconfigMEGetIP() (string, error) {
+	logger.Debugf("Start GetIP with ifconfigME")
 
-	resp, err := http.Get("https://www.whatismyip-address.com/")
+	resp, err := http.Get("http://ifconfig.me")
 	if err != nil {
 		return "", err
 	}
@@ -23,22 +23,22 @@ func whatismyipGetIP() (string, error) {
 		return "", err
 	}
 
-	ip, err := captureIP(string(body))
+	ip, err := captureIPv4(string(body))
 	if err != nil {
 		return "", err
 	}
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	logger.Debugf("Found IP wihth whatismyip: %+v\n", ip)
+	logger.Debugf("Found IP wihth ifconfigME: %+v\n", ip)
 	return ip, nil
 }
 
-var whatismyipProvider Provider = Provider{
-	GetIP:        whatismyipGetIP,
-	ProviderName: "whatismyip",
+var ifconfigMEProvider Provider = Provider{
+	GetIP:        ifconfigMEGetIP,
+	ProviderName: "IfconfigME",
 }
 
 func init() {
-	ProviderList = append(ProviderList, whatismyipProvider)
+	ProviderList = append(ProviderList, ifconfigMEProvider)
 }

@@ -17,7 +17,7 @@ type Provider struct {
 // ProviderList has all created providers
 var ProviderList []Provider = []Provider{}
 
-func captureIP(text string) (string, error) {
+func captureIPv4(text string) (string, error) {
 	r, err := regexp.Compile(`(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)`)
 	if err != nil {
 		return "", err
