@@ -38,3 +38,7 @@ var ipifyProvider Provider = Provider{
 	GetIP:        ipifyGetIP,
 	ProviderName: "Ipify",
 }
+
+func init() {
+	ProviderList = append(ProviderList, ipifyProvider)
+}

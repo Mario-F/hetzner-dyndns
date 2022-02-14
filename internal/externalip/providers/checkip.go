@@ -38,3 +38,7 @@ var checkIPProvider Provider = Provider{
 	GetIP:        checkIPGetIP,
 	ProviderName: "CheckIP",
 }
+
+func init() {
+	ProviderList = append(ProviderList, checkIPProvider)
+}

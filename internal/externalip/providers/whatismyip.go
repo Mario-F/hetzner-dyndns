@@ -38,3 +38,7 @@ var whatismyipProvider Provider = Provider{
 	GetIP:        whatismyipGetIP,
 	ProviderName: "whatismyip",
 }
+
+func init() {
+	ProviderList = append(ProviderList, whatismyipProvider)
+}

@@ -38,3 +38,7 @@ var ifconfigMEProvider Provider = Provider{
 	GetIP:        ifconfigMEGetIP,
 	ProviderName: "IfconfigME",
 }
+
+func init() {
+	ProviderList = append(ProviderList, ifconfigMEProvider)
+}
