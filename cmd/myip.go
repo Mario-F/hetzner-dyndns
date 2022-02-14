@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/Mario-F/hetzner-dyndns/internal/externalip"
+	"github.com/Mario-F/hetzner-dyndns/internal/network"
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +23,7 @@ var myipCmd = &cobra.Command{
 	Use:   "myip",
 	Short: "Acquire your external IP and output it",
 	Run: func(cmd *cobra.Command, args []string) {
-		res, err := externalip.GetExternalIP(externalip.IPv4)
+		res, err := externalip.GetExternalIP(network.IPv4)
 		if err != nil {
 			panic(err)
 		}

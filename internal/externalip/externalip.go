@@ -6,23 +6,17 @@ import (
 	"time"
 
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
+	"github.com/Mario-F/hetzner-dyndns/internal/network"
 	"github.com/Mario-F/hetzner-dyndns/internal/providers"
 )
 
-type IPVersion string
-
-const (
-	IPv4 IPVersion = "ipv4"
-	IPv6 IPVersion = "ipv6"
-)
-
 type ExternalIP struct {
-	IP      string    `json:"ip"`
-	Version IPVersion `json:"version"`
+	IP      string            `json:"ip"`
+	Version network.IPVersion `json:"version"`
 }
 
 // GetExternalIP gets the actual external IP by different Provides
-func GetExternalIP(version IPVersion) (ExternalIP, error) {
+func GetExternalIP(version network.IPVersion) (ExternalIP, error) {
 	var pList []providers.Provider = providers.ProviderList
 	result := ExternalIP{}
 	result.Version = version

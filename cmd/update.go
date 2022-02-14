@@ -7,6 +7,7 @@ import (
 	"github.com/Mario-F/hetzner-dyndns/internal/externalip"
 	"github.com/Mario-F/hetzner-dyndns/internal/hetzner"
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
+	"github.com/Mario-F/hetzner-dyndns/internal/network"
 	"github.com/spf13/cobra"
 )
 
@@ -29,7 +30,7 @@ var updateCmd = &cobra.Command{
 		}()
 		go func() {
 			var err error
-			myip, err = externalip.GetExternalIP(externalip.IPv4)
+			myip, err = externalip.GetExternalIP(network.IPv4)
 			if err != nil {
 				panic(err)
 			}
