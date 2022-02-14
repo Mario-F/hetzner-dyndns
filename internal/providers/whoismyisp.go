@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
+	"github.com/Mario-F/hetzner-dyndns/internal/network"
 )
 
 func whoismyispGetIP() (string, error) {
@@ -36,6 +37,7 @@ func whoismyispGetIP() (string, error) {
 
 var whoismyispProvider Provider = Provider{
 	GetIP:        whoismyispGetIP,
+	Version:      network.IPv4,
 	ProviderName: "whoismyisp",
 }
 

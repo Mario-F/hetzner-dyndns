@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
+	"github.com/Mario-F/hetzner-dyndns/internal/network"
 )
 
 func ipifyGetIP() (string, error) {
@@ -36,6 +37,7 @@ func ipifyGetIP() (string, error) {
 
 var ipifyProvider Provider = Provider{
 	GetIP:        ipifyGetIP,
+	Version:      network.IPv4,
 	ProviderName: "Ipify",
 }
 

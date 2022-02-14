@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
+	"github.com/Mario-F/hetzner-dyndns/internal/network"
 )
 
 func checkIPGetIP() (string, error) {
@@ -36,6 +37,7 @@ func checkIPGetIP() (string, error) {
 
 var checkIPProvider Provider = Provider{
 	GetIP:        checkIPGetIP,
+	Version:      network.IPv4,
 	ProviderName: "CheckIP",
 }
 

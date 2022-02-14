@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
+	"github.com/Mario-F/hetzner-dyndns/internal/network"
 )
 
 func ifconfigMEGetIP() (string, error) {
@@ -36,6 +37,7 @@ func ifconfigMEGetIP() (string, error) {
 
 var ifconfigMEProvider Provider = Provider{
 	GetIP:        ifconfigMEGetIP,
+	Version:      network.IPv4,
 	ProviderName: "IfconfigME",
 }
 

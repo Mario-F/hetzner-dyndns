@@ -3,6 +3,8 @@ package providers
 import (
 	"errors"
 	"regexp"
+
+	"github.com/Mario-F/hetzner-dyndns/internal/network"
 )
 
 var errIPNotFound error = errors.New("IP Not Found")
@@ -11,6 +13,7 @@ var errResponseNotOK error = errors.New("HTTP Response is not OK")
 // Provider holds a external ip provider
 type Provider struct {
 	GetIP        func() (string, error)
+	Version      network.IPVersion
 	ProviderName string
 }
 
