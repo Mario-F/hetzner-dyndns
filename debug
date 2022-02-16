@@ -1,2 +1,3 @@
 #!/bin/sh
-dlv debug --listen=:8345 --headless --log --api-version=2 -- "$@"
+DEBUG_PORT=${DEBUG_PORT:-8345}
+dlv debug --listen=:${DEBUG_PORT} --headless --log --api-version=2 -- "$@"
