@@ -42,13 +42,14 @@ var recordsCmd = &cobra.Command{
 		}
 		sort.Strings(domainSlice)
 
-		// Create an human readable result table
-		domainCellLength := longestDomain + 3
-		fmt.Println()
 		if len(domainSlice) == 0 {
 			fmt.Println("No records found")
 			return
 		}
+
+		// Create an human readable result table
+		domainCellLength := longestDomain + 3
+		fmt.Println()
 		printRecordLine("Domain", "ID", domainCellLength)
 		for _, k := range domainSlice {
 			record := resRecords[domainMap[k]]
