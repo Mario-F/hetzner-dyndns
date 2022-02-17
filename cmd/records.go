@@ -10,6 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var domain string
+
 var recordsCmd = &cobra.Command{
 	Use:   "records",
 	Short: "Retrieving all records with id from Hetzner DNS",
@@ -27,6 +29,11 @@ var recordsCmd = &cobra.Command{
 			domainMap     map[string]int = make(map[string]int, len(resRecords))
 		)
 		for i, v := range resRecords {
+			if domain != "" {
+				if v.Fullname != domain {
+					continue
+				}
+			}
 			if len(v.Fullname) > longestDomain {
 				longestDomain = len(v.Fullname)
 			}
@@ -38,6 +45,10 @@ var recordsCmd = &cobra.Command{
 		// Create an human readable result table
 		domainCellLength := longestDomain + 3
 		fmt.Println()
+		if len(domainSlice) == 0 {
+			fmt.Println("No records found")
+			return
+		}
 		printRecordLine("Domain", "ID", domainCellLength)
 		for _, k := range domainSlice {
 			record := resRecords[domainMap[k]]
@@ -56,6 +67,7 @@ func init() {
 	rootCmd.AddCommand(recordsCmd)
 
 	recordsCmd.Flags().StringVar(&token, "token", "", "The hetzner token to access DNS API")
+	recordsCmd.Flags().StringVar(&domain, "domain", "", "Get exactly this domain")
 	err := recordsCmd.MarkFlagRequired("token")
 	if err != nil {
 		fmt.Printf("An error occurred: %v+", err)
