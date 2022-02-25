@@ -2,17 +2,29 @@ package providers
 
 import "testing"
 
+type TestStringValueResult struct {
+	Input  string
+	Output string
+}
+
 func TestCaptureIPv6(t *testing.T) {
 	t.Run("Test capture from string", func(t *testing.T) {
-		testString := "Your IPv6 address on the public Internet appears to be 2001:9e8:e169:4400:23f5:f330:350b:7e80"
-		testStringResult := "2001:9e8:e169:4400:23f5:f330:350b:7e80"
-		ip, err := captureIPv6(testString)
-		if err != nil {
-			t.Error(err)
-			t.Errorf("Cant parse string: %v+", testString)
+		testings := []TestStringValueResult{
+			{
+				Input:  "Your IPv6 address on the public Internet appears to be 2001:9e8:e169:4400:23f5:f330:350b:7e80",
+				Output: "2001:9e8:e169:4400:23f5:f330:350b:7e80",
+			},
 		}
-		if ip != testStringResult {
-			t.Errorf("%s should be %s", ip, testStringResult)
+
+		for _, testV6 := range testings {
+			ip, err := captureIPv6(testV6.Input)
+			if err != nil {
+				t.Error(err)
+				t.Errorf("Cant parse string: %v+", testV6.Input)
+			}
+			if ip != testV6.Output {
+				t.Errorf("%s should be %s", ip, testV6.Output)
+			}
 		}
 	})
 }
