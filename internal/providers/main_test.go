@@ -31,15 +31,22 @@ func TestCaptureIPv6(t *testing.T) {
 
 func TestCaptureIPv4(t *testing.T) {
 	t.Run("Test capture from string", func(t *testing.T) {
-		testString := "<html><div>you ip is 89.244.207.0</div></html>"
-		testStringResult := "89.244.207.0"
-		ip, err := captureIPv4(testString)
-		if err != nil {
-			t.Error(err)
-			t.Errorf("Cant parse string: %v+", testString)
+		testings := []TestStringValueResult{
+			{
+				Input:  "<html><div>you ip is 89.244.207.0</div></html>",
+				Output: "89.244.207.0",
+			},
 		}
-		if ip != testStringResult {
-			t.Errorf("%s should be %s", ip, testStringResult)
+
+		for _, testV4 := range testings {
+			ip, err := captureIPv4(testV4.Input)
+			if err != nil {
+				t.Error(err)
+				t.Errorf("Cant parse string: %v+", testV4.Input)
+			}
+			if ip != testV4.Output {
+				t.Errorf("%s should be %s", ip, testV4.Output)
+			}
 		}
 	})
 }
