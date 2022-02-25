@@ -14,6 +14,10 @@ func TestCaptureIPv6(t *testing.T) {
 				Input:  "Your IPv6 address on the public Internet appears to be 2001:9e8:e169:4400:23f5:f330:350b:7e80",
 				Output: "2001:9e8:e169:4400:23f5:f330:350b:7e80",
 			},
+			{
+				Input:  "2001:9e8:e169:4400:23f5:f330:350b:7e80 is your ip address",
+				Output: "2001:9e8:e169:4400:23f5:f330:350b:7e80",
+			},
 		}
 
 		for _, testV6 := range testings {
@@ -34,6 +38,10 @@ func TestCaptureIPv4(t *testing.T) {
 		testings := []TestStringValueResult{
 			{
 				Input:  "<html><div>you ip is 89.244.207.0</div></html>",
+				Output: "89.244.207.0",
+			},
+			{
+				Input:  "89.244.207.0",
 				Output: "89.244.207.0",
 			},
 		}
