@@ -21,6 +21,7 @@ func TestCaptureIPv6(t *testing.T) {
 				Inputs: []string{
 					"2a01:4f8:1c1e:71c9::1",
 					"your ipv6 is 2a01:4f8:1c1e:71c9::1, click for...",
+					"##     Your IP Address is 2a01:4f8:1c1e:71c9::1 (34850)     ##",
 				},
 				Output: "2a01:4f8:1c1e:71c9::1",
 			},
@@ -50,6 +51,15 @@ func TestCaptureIPv4(t *testing.T) {
 					"89.244.207.0",
 				},
 				Output: "89.244.207.0",
+			},
+			{
+				Inputs: []string{
+					"4.4.4.4",
+					"4.4.4.4right noise",
+					"leftnoise4.4.4.4",
+					"full.4.4.4.4-noise",
+				},
+				Output: "4.4.4.4",
 			},
 		}
 
