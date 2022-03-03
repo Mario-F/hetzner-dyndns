@@ -28,6 +28,13 @@ func TestCaptureIPv6(t *testing.T) {
 				},
 				Output: "2a01:4f8:1c1e:71c9::1",
 			},
+			{
+				Inputs: []string{
+					"2001:db8::ea34::71ff:fe0",
+					"noiseleft2001:db8::ea34::71ff:fe0 noise right",
+				},
+				Output: "2001:db8::ea34::71ff:fe0",
+			},
 		}
 
 		for _, testV6 := range testings {
