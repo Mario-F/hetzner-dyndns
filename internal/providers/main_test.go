@@ -78,6 +78,14 @@ func TestCaptureIPv4(t *testing.T) {
 				},
 				Output: "4.4.4.4",
 			},
+			{
+				Inputs: []string{
+					"1::3:4:5:6:7:8",
+					"asdasd 1::3:4:5:6:7:8noise",
+					"<>1::3:4:5:6:7:8-1",
+				},
+				Output: "1::3:4:5:6:7:8",
+			},
 		}
 
 		for _, testV4 := range testings {
