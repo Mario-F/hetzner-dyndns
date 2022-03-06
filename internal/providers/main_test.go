@@ -33,7 +33,7 @@ func TestCaptureIPv6(t *testing.T) {
 					"2001:db8:ea34::71ff:fe0",
 					"noiseleft2001:db8:ea34::71ff:fe0 noise right",
 				},
-				Output: "2001:db8::ea34::71ff:fe0",
+				Output: "2001:db8:ea34::71ff:fe0",
 			},
 			{
 				Inputs: []string{
