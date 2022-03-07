@@ -29,7 +29,6 @@ func captureIPv4(text string) (string, error) {
 }
 
 func captureIPv6(text string) (string, error) {
-	// used modified regex from: https://gist.github.com/syzdek/6086792
 	r, err := regexp.Compile(`(([0-9a-fA-F]{1,4}:{1,2}?[0-9a-fA-F]{1,4})|([0-9a-fA-F]{1,4}:{1,2}?)|(:{1,2}?[0-9a-fA-F]{1,4})){2,8}`)
 	if err != nil {
 		return "", err
