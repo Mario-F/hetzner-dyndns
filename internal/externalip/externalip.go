@@ -17,7 +17,15 @@ type ExternalIP struct {
 
 // GetExternalIP gets the actual external IP by different Provides
 func GetExternalIP(version network.IPVersion) (ExternalIP, error) {
-	var pList []providers.Provider = providers.ProviderList
+	var pList []providers.Provider
+
+	for _, p := range providers.ProviderList {
+		if p.Version == version {
+			pList = append(pList, p)
+		}
+	}
+	logger.Debugf("Found %d providers for ip version %s", len(pList), string(version))
+
 	result := ExternalIP{}
 	result.Version = version
 
