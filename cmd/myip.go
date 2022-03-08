@@ -17,13 +17,29 @@ var OutputModes = []string{
 	"json",
 }
 
-var outputMode string
+var IPVersions = []string{
+	"ipv4",
+	"ipv6",
+}
+
+var (
+	outputMode string
+	ipVersion  string
+)
 
 var myipCmd = &cobra.Command{
 	Use:   "myip",
 	Short: "Acquire your external IP and output it",
 	Run: func(cmd *cobra.Command, args []string) {
-		res, err := externalip.GetExternalIP(network.IPv4)
+		var res externalip.ExternalIP
+		var err error
+
+		switch ipVersion {
+		case string(network.IPv4):
+			res, err = externalip.GetExternalIP(network.IPv4)
+		case string(network.IPv6):
+			res, err = externalip.GetExternalIP(network.IPv6)
+		}
 		if err != nil {
 			panic(err)
 		}
@@ -52,4 +68,5 @@ func init() {
 	rootCmd.AddCommand(myipCmd)
 
 	myipCmd.Flags().StringVarP(&outputMode, "output", "o", "text", fmt.Sprintf("How the result should be formatted.\nAllowed values: %s", strings.Join(OutputModes, ", ")))
+	myipCmd.Flags().StringVarP(&ipVersion, "version", "", "ipv4", fmt.Sprintf("Which ip version to check.\nAllowed values: %s", strings.Join(IPVersions, ", ")))
 }
