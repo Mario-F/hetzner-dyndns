@@ -50,5 +50,5 @@ func GetExternalIP(version network.IPVersion) (ExternalIP, error) {
 		found = ip
 	}
 
-	return result, errors.New("at least 2 providers doesnt confirm external IP")
+	return result, errors.New("at least 2 providers needs to confirm external ip")
 }
