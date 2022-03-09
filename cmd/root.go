@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
 	log "github.com/sirupsen/logrus"
@@ -18,6 +19,11 @@ var (
 )
 
 var Version = "development"
+
+var IPVersions = []string{
+	"ipv4",
+	"ipv6",
+}
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -35,6 +41,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 	cobra.OnInitialize(initLogging)
+	cobra.OnInitialize(validateInputs)
 
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
@@ -43,6 +50,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolVar(&logger.DebugMode, "debug", false, "Turn on debug messages")
 	rootCmd.PersistentFlags().BoolVar(&logger.QuietMode, "quiet", false, "Suppress logmessages")
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.hetzner-dyndns.yaml)")
+	rootCmd.PersistentFlags().StringVarP(&ipVersion, "version", "", "ipv4", fmt.Sprintf("Which ip version to check.\nAllowed values: %s", strings.Join(IPVersions, ", ")))
 }
 
 // initLogging set up logging with logrus
@@ -74,5 +82,20 @@ func initConfig() {
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
+	}
+}
+
+// validateInputs validate flags
+func validateInputs() {
+	// check for ipversion
+	foundVersion := false
+	for _, v := range IPVersions {
+		if v == ipVersion {
+			foundVersion = true
+		}
+	}
+	if !foundVersion {
+		err := fmt.Errorf("Version must be one of: %s", strings.Join(IPVersions, ", "))
+		cobra.CheckErr(err)
 	}
 }

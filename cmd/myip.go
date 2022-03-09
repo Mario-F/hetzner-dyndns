@@ -17,11 +17,6 @@ var OutputModes = []string{
 	"json",
 }
 
-var IPVersions = []string{
-	"ipv4",
-	"ipv6",
-}
-
 var (
 	outputMode string
 	ipVersion  string
@@ -68,5 +63,4 @@ func init() {
 	rootCmd.AddCommand(myipCmd)
 
 	myipCmd.Flags().StringVarP(&outputMode, "output", "o", "text", fmt.Sprintf("How the result should be formatted.\nAllowed values: %s", strings.Join(OutputModes, ", ")))
-	myipCmd.Flags().StringVarP(&ipVersion, "version", "", "ipv4", fmt.Sprintf("Which ip version to check.\nAllowed values: %s", strings.Join(IPVersions, ", ")))
 }
