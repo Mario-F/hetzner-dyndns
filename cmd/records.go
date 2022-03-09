@@ -7,6 +7,7 @@ import (
 
 	"github.com/Mario-F/hetzner-dyndns/internal/hetzner"
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
+	"github.com/Mario-F/hetzner-dyndns/internal/network"
 	"github.com/spf13/cobra"
 )
 
@@ -19,7 +20,7 @@ var recordsCmd = &cobra.Command{
 		var resRecords []hetzner.Record
 
 		hetzner.SetToken(token)
-		resRecords = hetzner.GetRecords()
+		resRecords = hetzner.GetRecords(network.IPVersion(ipVersion))
 		logger.Debugf("Results from GetRecords: %d", len(resRecords))
 
 		// Process result to find order and size data

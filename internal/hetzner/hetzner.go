@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/Mario-F/hetzner-dyndns/internal/logger"
+	"github.com/Mario-F/hetzner-dyndns/internal/network"
 )
 
 const (
@@ -120,7 +121,7 @@ func getRequest(uri string) responses {
 }
 
 // GetRecords get all dns records merged with its zone information
-func GetRecords() []Record {
+func GetRecords(ipVersion network.IPVersion) []Record {
 	var (
 		wg         sync.WaitGroup = sync.WaitGroup{}
 		resZones   []Zone
@@ -141,9 +142,17 @@ func GetRecords() []Record {
 	}()
 	wg.Wait()
 
+	var recordType string
+	switch ipVersion {
+	case network.IPv4:
+		recordType = "A"
+	case network.IPv6:
+		recordType = "AAAA"
+	}
+
 	aRecords := []Record{}
 	for _, r := range resRecords {
-		if r.Type == "A" {
+		if r.Type == recordType {
 			for _, z := range resZones {
 				if z.ID == r.ZoneID {
 					r.Zone = z
