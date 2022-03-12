@@ -48,6 +48,7 @@ var recordsCmd = &cobra.Command{
 			return
 		}
 
+		// TODO: Add record type to table
 		// Create an human readable result table
 		domainCellLength := longestDomain + 3
 		fmt.Println()
