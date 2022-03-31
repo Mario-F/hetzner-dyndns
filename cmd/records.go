@@ -25,7 +25,9 @@ var recordsCmd = &cobra.Command{
 
 		// Process result to find order and size data
 		var (
-			longestDomain int            = 10
+			longestDomain int            = 8
+			longestType   int            = 4
+			longestValue  int            = 8
 			domainSlice   []string       = make([]string, 0, len(resRecords))
 			domainMap     map[string]int = make(map[string]int, len(resRecords))
 		)
@@ -38,6 +40,12 @@ var recordsCmd = &cobra.Command{
 			if len(v.Fullname) > longestDomain {
 				longestDomain = len(v.Fullname)
 			}
+			if len(v.Type) > longestType {
+				longestType = len(v.Type)
+			}
+			if len(v.Value) > longestValue {
+				longestValue = len(v.Value)
+			}
 			domainMap[v.Fullname] = i
 			domainSlice = append(domainSlice, v.Fullname)
 		}
@@ -48,22 +56,21 @@ var recordsCmd = &cobra.Command{
 			return
 		}
 
-		// TODO: Add record type to table
-		// Create an human readable result table
-		domainCellLength := longestDomain + 3
 		fmt.Println()
-		printRecordLine("Domain", "ID", domainCellLength)
+		printRecordLine("Domain", "Type", "Value", "ID", longestDomain, longestType, longestValue)
 		for _, k := range domainSlice {
 			record := resRecords[domainMap[k]]
-			printRecordLine(record.Fullname, record.ID, domainCellLength)
+			printRecordLine(record.Fullname, record.Type, record.Value, record.ID, longestDomain, longestType, longestValue)
 		}
 		fmt.Println()
 	},
 }
 
-func printRecordLine(lineFirst string, lineSecond string, lengthFirst int) {
-	fillSpace := lengthFirst - len(lineFirst)
-	fmt.Println(lineFirst, strings.Repeat(" ", fillSpace), lineSecond)
+func printRecordLine(rDomain string, rType string, rValue string, rID string, longestDomain int, longestType int, longestValue int) {
+	fillDomain := longestDomain - len(rDomain)
+	fillType := longestType - len(rType)
+	fillValue := longestValue - len(rValue)
+	fmt.Println(rDomain, strings.Repeat(" ", fillDomain), rType, strings.Repeat(" ", fillType), rValue, strings.Repeat(" ", fillValue), rID)
 }
 
 func init() {
