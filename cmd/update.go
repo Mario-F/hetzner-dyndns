@@ -30,7 +30,7 @@ var updateCmd = &cobra.Command{
 		}()
 		go func() {
 			var err error
-			myip, err = externalip.GetExternalIP(network.IPv4)
+			myip, err = externalip.GetExternalIP(network.IPVersion(ipVersion))
 			if err != nil {
 				panic(err)
 			}

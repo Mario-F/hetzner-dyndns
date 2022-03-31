@@ -32,6 +32,12 @@ curl -s https://raw.githubusercontent.com/Mario-F/hetzner-dyndns/master/install.
 
 There is also a docker image available: `docker run --rm -it ghcr.io/mario-f/hetzner-dyndns:latest myip`
 
+### IPv6 (Experimental)
+
+IPv6 support can activated with `--version ipv6`, with flag set all commands will work with IPv6.
+
+Due the lack of testing possibilities this mode is considered experimental at this moment!
+
 ## Development / Debugging
 
 There a serveral ways to easy start development and using live debugging provided by [delve](https://github.com/go-delve/delve)
