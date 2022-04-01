@@ -4,6 +4,7 @@ bin/
 
 # Custom
 temp
+__debug_bin
 .vscode/*
 !.vscode/launch.json
 
