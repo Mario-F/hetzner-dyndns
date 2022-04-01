@@ -46,7 +46,7 @@ There a serveral ways to easy start development and using live debugging provide
 
 The provided launch.json has a debug task `Launch File` predefined, just hit start and it should run with the args provided in launch.json.
 
-## VSCode external Terminal
+### VSCode external Terminal
 
 A more advanced way to test in an external Terminal is provided by the `External Debugging` launch config and `./debug` script:
 
