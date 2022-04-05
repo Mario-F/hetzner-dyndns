@@ -96,6 +96,8 @@ func getRequest(uri string) responses {
 	var resp *http.Response
 	finshed := false
 	for i := 0; i < 3 && !finshed; i++ {
+		// TODO: Retry on timeout because some times hetzner is not ready
+
 		resp, err = client.Do(req)
 		if err != nil {
 			panic(err)
