@@ -79,6 +79,30 @@ func (r Record) Update() error {
 	return nil
 }
 
+func CheckToken(token string) error {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", hetznerURL+"zones", nil)
+	if err != nil {
+		return err
+	}
+
+	req.Header.Add("Auth-API-Token", token)
+	parseFormErr := req.ParseForm()
+	if parseFormErr != nil {
+		return parseFormErr
+	}
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	if resp.StatusCode != 200 {
+		return fmt.Errorf("Failed to check token, statuscode: %d", resp.StatusCode)
+	}
+
+	return nil
+}
+
 func getRequest(uri string) responses {
 	client := &http.Client{}
 
