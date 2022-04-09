@@ -17,12 +17,12 @@ func Cronjob() error {
 		Items: []string{"ipv6", "ipv4"},
 	}
 
-	_, option, err := prompt.Run()
+	_, ipOption, err := prompt.Run()
 	if err != nil {
 		return fmt.Errorf("Select failed %v\n", err)
 	}
 
-	switch option {
+	switch ipOption {
 	case "ipv6":
 		ipVersion = network.IPv6
 	case "ipv4":
