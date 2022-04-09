@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/Mario-F/hetzner-dyndns/internal/network"
 	"github.com/Mario-F/hetzner-dyndns/internal/setup"
 	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
@@ -14,7 +13,6 @@ var setupCmd = &cobra.Command{
 	Use:   "setup",
 	Short: "Provides a guided setup",
 	Run: func(cmd *cobra.Command, args []string) {
-		setup.SetVersion(network.IPVersion(ipVersion))
 
 		prompt := promptui.Select{
 			Label: "Select a setup option",
