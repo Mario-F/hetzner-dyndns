@@ -33,7 +33,7 @@ func GetExternalIP(version network.IPVersion) (ExternalIP, error) {
 	rand.Seed(time.Now().UnixNano())
 	rand.Shuffle(len(pList), func(i, j int) { pList[i], pList[j] = pList[j], pList[i] })
 
-	var found string
+	found := make(map[string]int)
 	for _, p := range pList {
 		ip, err := p.GetIP()
 		if err != nil {
@@ -42,12 +42,12 @@ func GetExternalIP(version network.IPVersion) (ExternalIP, error) {
 		}
 		logger.Debugf("Name: %+v, IP: %+v", p.ProviderName, ip)
 		// found is equal ip means that is the second confirmation
-		if found == ip {
+		if found[ip] > 0 {
 			logger.Debugf("Second confirmation for IP: %+v", ip)
 			result.IP = ip
 			return result, nil
 		}
-		found = ip
+		found[ip]++
 	}
 
 	return result, errors.New("at least 2 providers needs to confirm external ip")
