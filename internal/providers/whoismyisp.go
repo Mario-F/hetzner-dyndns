@@ -31,7 +31,7 @@ func whoismyispGetIP() (string, error) {
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	logger.Debugf("Found IP wihth whoismyisp: %+v\n", ip)
+	logger.Debugf("Found IP with whoismyisp: %+v\n", ip)
 	return ip, nil
 }
 

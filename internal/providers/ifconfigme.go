@@ -31,7 +31,7 @@ func ifconfigMEGetIP() (string, error) {
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	logger.Debugf("Found IP wihth ifconfigME: %+v\n", ip)
+	logger.Debugf("Found IP with ifconfigME: %+v\n", ip)
 	return ip, nil
 }
 

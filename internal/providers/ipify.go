@@ -31,7 +31,7 @@ func ipifyGetIP() (string, error) {
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	logger.Debugf("Found IP wihth ipify: %+v\n", ip)
+	logger.Debugf("Found IP with ipify: %+v\n", ip)
 	return ip, nil
 }
 

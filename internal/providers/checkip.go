@@ -31,7 +31,7 @@ func checkIPGetIP() (string, error) {
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	logger.Debugf("Found IP wihth CheckIP: %+v\n", ip)
+	logger.Debugf("Found IP with CheckIP: %+v\n", ip)
 	return ip, nil
 }
 

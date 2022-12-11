@@ -31,7 +31,7 @@ func whatismyipGetIP() (string, error) {
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	logger.Debugf("Found IP wihth whatismyip: %+v\n", ip)
+	logger.Debugf("Found IP with whatismyip: %+v\n", ip)
 	return ip, nil
 }
 
