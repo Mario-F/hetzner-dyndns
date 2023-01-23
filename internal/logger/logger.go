@@ -24,3 +24,8 @@ func Infof(msg string, vars ...interface{}) {
 		log.Infof(msg, vars...)
 	}
 }
+
+// Errorf logs formatted error messages
+func Errorf(msg string, vars ...interface{}) {
+	log.Errorf(msg, vars...)
+}
