@@ -13,7 +13,7 @@ lint:
 
 # Run gorelease dry
 godry:
-	goreleaser --snapshot --skip-publish --rm-dist
+	goreleaser --snapshot --skip-publish --clean
 
 godownloader:
 	godownloader --repo=Mario-F/hetzner-dyndns > ./install.sh
