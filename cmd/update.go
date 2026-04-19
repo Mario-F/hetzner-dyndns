@@ -59,7 +59,7 @@ var updateCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(updateCmd)
 
-	updateCmd.Flags().StringVar(&token, "token", "", "The hetzner token to access DNS API")
+	updateCmd.Flags().StringVar(&token, "token", "", "The Hetzner Cloud API token for DNS")
 	err := updateCmd.MarkFlagRequired("token")
 	if err != nil {
 		fmt.Printf("An error occurred: %v+", err)

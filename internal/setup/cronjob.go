@@ -30,7 +30,7 @@ func Cronjob() error {
 	}
 
 	promptToken := promptui.Prompt{
-		Label:    "Please enter your Hetzner token for access dns",
+		Label:    "Please enter your Hetzner Cloud API token for DNS access",
 		Validate: checkHetznerToken,
 	}
 

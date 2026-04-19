@@ -5,7 +5,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/Mario-F/hetzner-dyndns)
 ![GitHub all releases](https://img.shields.io/github/downloads/Mario-F/hetzner-dyndns/total)
 
-A tool for updating Hetzner DNS with your external IP.
+A tool for updating Hetzner Cloud DNS with your external IP.
 
 ## IP Scraping
 
@@ -26,9 +26,9 @@ curl -s https://raw.githubusercontent.com/Mario-F/hetzner-dyndns/master/install.
 ## Usage
 
 1. Test external IP with: `./hetzner-dyndns myip`
-2. Obtain your API-Token from Hetzner DNS managment site.
-3. Fetch your domain record ids with: `./hetzner-dyndns --token 'your-api-token' records`
-4. Call update with record ID: `./hetzner-dyndns --token 'your-api-token' --record 'domain-record-id' update`
+2. Obtain your API token in Hetzner Console: Project -> Security -> API Tokens.
+3. Fetch your domain record IDs with: `./hetzner-dyndns --token 'your-api-token' records`
+4. Call update with record ID: `./hetzner-dyndns --token 'your-api-token' --record 'zone-id/rr-name/rr-type' update`
 
 There is also a docker image available: `docker run --rm -it ghcr.io/mario-f/hetzner-dyndns:latest myip`
 

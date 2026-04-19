@@ -76,7 +76,7 @@ func printRecordLine(rDomain string, rType string, rValue string, rID string, lo
 func init() {
 	rootCmd.AddCommand(recordsCmd)
 
-	recordsCmd.Flags().StringVar(&token, "token", "", "The hetzner token to access DNS API")
+	recordsCmd.Flags().StringVar(&token, "token", "", "The Hetzner Cloud API token for DNS")
 	recordsCmd.Flags().StringVar(&domain, "domain", "", "Get exactly this domain")
 	err := recordsCmd.MarkFlagRequired("token")
 	if err != nil {

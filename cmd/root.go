@@ -28,8 +28,8 @@ var IPVersions = []string{
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "hetzner-dyndns",
-	Short: "Updates Hetzner DNS with external IP.",
-	Long:  `A tool for updating Hetzner DNS with your external IP.`,
+	Short: "Updates Hetzner Cloud DNS with external IP.",
+	Long:  `A tool for updating Hetzner Cloud DNS with your external IP.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
