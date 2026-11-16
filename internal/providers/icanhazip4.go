@@ -8,10 +8,10 @@ import (
 	"github.com/Mario-F/hetzner-dyndns/internal/network"
 )
 
-func whoismyispGetIP() (string, error) {
-	logger.Debugf("Start GetIP with whoismyisp")
+func icanhazip4GetIP() (string, error) {
+	logger.Debugf("Start GetIP with icanhazip4")
 
-	resp, err := http.Get("https://www.whoismyisp.org/")
+	resp, err := http.Get("https://ipv4.icanhazip.com")
 	if err != nil {
 		return "", err
 	}
@@ -31,16 +31,16 @@ func whoismyispGetIP() (string, error) {
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	logger.Debugf("Found IP with whoismyisp: %+v\n", ip)
+	logger.Debugf("Found IP with icanhazip4: %+v\n", ip)
 	return ip, nil
 }
 
-var whoismyispProvider Provider = Provider{
-	GetIP:        whoismyispGetIP,
+var icanhazip4Provider Provider = Provider{
+	GetIP:        icanhazip4GetIP,
 	Version:      network.IPv4,
-	ProviderName: "whoismyisp",
+	ProviderName: "icanhazip4",
 }
 
 func init() {
-	ProviderList = append(ProviderList, whoismyispProvider)
+	ProviderList = append(ProviderList, icanhazip4Provider)
 }

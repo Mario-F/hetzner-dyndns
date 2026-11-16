@@ -8,10 +8,10 @@ import (
 	"github.com/Mario-F/hetzner-dyndns/internal/network"
 )
 
-func piliappGetIP() (string, error) {
-	logger.Debugf("Start GetIP with piliapp")
+func identme4GetIP() (string, error) {
+	logger.Debugf("Start GetIP with identme4")
 
-	resp, err := http.Get("https://de.piliapp.com/what-is-my/ipv6/")
+	resp, err := http.Get("https://v4.ident.me")
 	if err != nil {
 		return "", err
 	}
@@ -24,23 +24,23 @@ func piliappGetIP() (string, error) {
 		return "", err
 	}
 
-	ip, err := captureIPv6(string(body))
+	ip, err := captureIPv4(string(body))
 	if err != nil {
 		return "", err
 	}
 	if ip == "" {
 		return "", errIPNotFound
 	}
-	logger.Debugf("Found IP with piliapp: %+v\n", ip)
+	logger.Debugf("Found IP with identme4: %+v\n", ip)
 	return ip, nil
 }
 
-var piliappProvider Provider = Provider{
-	GetIP:        piliappGetIP,
-	Version:      network.IPv6,
-	ProviderName: "piliapp",
+var identme4Provider Provider = Provider{
+	GetIP:        identme4GetIP,
+	Version:      network.IPv4,
+	ProviderName: "identme4",
 }
 
 func init() {
-	ProviderList = append(ProviderList, piliappProvider)
+	ProviderList = append(ProviderList, identme4Provider)
 }
